@@ -5,7 +5,7 @@ import tempfile
 from converter import MarkdownConverter # Importa la lógica del conversor
 
 app = Flask(__name__)
-app.secret_key = 'tu_clave_secreta_aqui' # Cambia esto por una clave segura en producción
+app.secret_key = 'tu_clave_secreta_aqui_cambiala_por_una_segura' # Cambia esto por una clave segura en producción
 
 # Instancia del conversor
 converter = MarkdownConverter()
@@ -32,12 +32,20 @@ def index():
                     md_path = os.path.join(tmpdirname, markdown_file.filename)
                     markdown_file.save(md_path)
 
-                    # Opcional: manejar la plantilla (si decides implementarla)
-                    # template_file = request.files.get('template_file')
-                    # template_path = None
-                    # if template_file and template_file.filename != '':
-                    #     template_path = os.path.join(tmpdirname, template_file.filename)
-                    #     template_file.save(template_path)
+                    # Manejar la plantilla DOCX (opcional)
+                    template_path = None
+                    template_file = request.files.get('template_file')
+                    if template_file and template_file.filename != '':
+                        # Guardar la plantilla subida
+                        template_filename = template_file.filename
+                        # Asegurarse de que tenga la extensión .docx
+                        if not template_filename.lower().endswith('.docx'):
+                            flash('El archivo de plantilla debe ser un documento DOCX (.docx).')
+                            return redirect(request.url)
+                        
+                        template_path = os.path.join(tmpdirname, template_filename)
+                        template_file.save(template_path)
+                        app.logger.info(f"Plantilla DOCX guardada temporalmente en: {template_path}")
 
                     # Leer el contenido del markdown
                     with open(md_path, 'r', encoding='utf-8') as f:
@@ -50,17 +58,15 @@ def index():
                     output_filename = os.path.splitext(markdown_file.filename)[0] + ".docx"
                     output_path = os.path.join(tmpdirname, output_filename)
 
-                    # Convertir a DOCX (sin plantilla en esta versión simplificada)
-                    converter.convert_to_docx(elements, output_path)
+                    # Convertir a DOCX, pasando la ruta de la plantilla si existe
+                    converter.convert_to_docx(elements, output_path, template_path)
 
                     # Enviar el archivo generado al usuario
                     return send_file(output_path, as_attachment=True, download_name=output_filename)
 
             except Exception as e:
                 flash(f'Error al convertir el archivo: {str(e)}')
-                # Para depuración, puedes imprimir el traceback completo en logs del servidor
-                # import traceback
-                # app.logger.error(traceback.format_exc())
+                app.logger.error(f"Error en la conversión: {e}", exc_info=True)
                 return redirect(request.url)
 
     # Si es GET o si hay un error, mostrar el formulario
