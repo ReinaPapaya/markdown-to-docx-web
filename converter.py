@@ -160,6 +160,7 @@ class MarkdownConverter:
 
     def convert_to_docx(self, elements, output_path, template_path=None):
         """Convierte elementos a formato DOCX, opcionalmente usando una plantilla."""
+        # ...
         # Usar plantilla si se proporciona, de lo contrario crear documento nuevo
         if template_path and os.path.exists(template_path):
             try:
