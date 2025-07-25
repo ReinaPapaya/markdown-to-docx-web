@@ -75,6 +75,25 @@
             color: #555;
             font-style: italic;
         }
+        .info-box {
+            background-color: #e7f3ff;
+            border-left: 6px solid #2196F3;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .info-box h3 {
+            margin-top: 0;
+            color: #2196F3;
+        }
+        .info-box ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+        .info-box li {
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
@@ -105,6 +124,17 @@
                 </div>
             {% endif %}
         {% endwith %}
+
+        <!-- Caja de información importante -->
+        <div class="info-box">
+            <h3>Información sobre Plantillas</h3>
+            <p><strong>Si usaste una plantilla:</strong></p>
+            <ul>
+                <li>El contenido convertido desde tu archivo Markdown se <strong>agrega al final</strong> del documento de la plantilla.</li>
+                <li>Debes <strong>editar manualmente</strong> la portada, encabezados, pies de página y otros elementos fijos de la plantilla en Microsoft Word.</li>
+                <li>Después de editar, <strong>actualiza los índices</strong> (Tabla de Contenidos, Índice de Tablas, etc.) desde Word.</li>
+            </ul>
+        </div>
 
         <footer>
             <p>Conversor basado en Python. Sube tu archivo Markdown y descarga el DOCX resultante.</p>
