@@ -2,25 +2,18 @@
 
 Esta es una aplicación web simple que convierte archivos Markdown (`.md`) a documentos de Microsoft Word (`.docx`).
 
-## Cómo usar
+## Descripción
 
-1.  Accede a la aplicación web.
-2.  Haz clic en "Selecciona tu archivo Markdown".
-3.  Elige el archivo `.md` que deseas convertir.
-4.  Haz clic en el botón "Convertir a DOCX".
-5.  El navegador iniciará la descarga del archivo `.docx` convertido.
+Permite a los usuarios subir un archivo Markdown y descargarlo convertido a formato DOCX. Está construida con Python usando el framework Flask para la web y la librería `python-docx` para la generación del documento.
 
-## Despliegue en Render
+## Archivos del Proyecto
 
-1.  Crea un repositorio en GitHub con estos archivos.
-2.  Regístrate/Inicia sesión en [https://render.com](https://render.com).
-3.  Crea un nuevo "Web Service".
-4.  Conecta tu repositorio de GitHub.
-5.  Configura el servicio:
-    *   **Name:** Elige un nombre para tu servicio.
-    *   **Runtime:** Python 3.
-    *   **Build Command:** `pip install -r requirements.txt`
-    *   **Start Command:** `gunicorn app:app` (necesitarás agregar `gunicorn` a `requirements.txt`: `echo "gunicorn" >> requirements.txt`)
-6.  Haz clic en "Create Web Service".
+*   `app.py`: Aplicación web principal (Flask).
+*   `converter.py`: Contiene la lógica principal para parsear Markdown y generar DOCX, basada en el script original `Qwen_MDtoDocx.py`.
+*   `requirements.txt`: Lista de dependencias de Python necesarias.
+*   `templates/index.html`: Página web de la interfaz de usuario.
+*   `README.md`: Este archivo.
 
-La aplicación se desplegará automáticamente.
+## Desarrollo
+
+Este proyecto está en desarrollo. Las instrucciones para ejecutarlo localmente y desplegarlo en un servicio como Render se agregarán próximamente.
