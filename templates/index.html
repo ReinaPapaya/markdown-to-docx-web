@@ -70,6 +70,11 @@
             color: #777;
             font-size: 0.9em;
         }
+        .note {
+            font-size: 0.85em;
+            color: #555;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -80,12 +85,13 @@
                 <label for="markdown_file">Selecciona tu archivo Markdown (.md):</label>
                 <input type="file" id="markdown_file" name="markdown_file" accept=".md,.markdown,.txt" required>
             </div>
-            <!-- Opcional: Para plantillas
+            
             <div class="form-group">
                 <label for="template_file">Selecciona una plantilla DOCX (opcional):</label>
                 <input type="file" id="template_file" name="template_file" accept=".docx">
+                <p class="note">Si seleccionas una plantilla, el estilo del documento generado se basará en ella.</p>
             </div>
-            -->
+            
             <input type="submit" value="Convertir a DOCX">
         </form>
 
